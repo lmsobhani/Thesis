@@ -1,0 +1,56 @@
+import pandas as pd
+
+df = pd.read_csv("Foreign+Leader+Messaging+Survey_July+3,+2025_23.18.csv")
+
+print(df.columns.tolist())
+
+
+
+'''
+df["group"]=df["group_code"].map({"FL_23": "Control", "FL_24": "Treatment"})
+
+x = df.loc[:, "Q1":"Q14"]
+x = x.apply(pd.to_numeric, errors='coerce')  # force all columns to be numeric
+x = sm.add_constant(x)
+y = pd.to_numeric(df["Q9"], errors='coerce')  # or whichever column you're using
+
+
+#Fit the model
+model = sm.OLS(y, x, missing='drop')
+results = model.fit()
+print(results.summary())
+
+
+#build summary dataframe
+coef = results.params
+conf = results.conf_int()
+conf.columns = ["lower","upper"]
+
+summary_df=pd.DataFrame({
+    "coef": coef,
+    "lower": conf["lower"],
+    "upper": conf["upper"]
+})
+
+#sort coef by size
+summary_df=summary_df.drop("const", errors="ignore")
+
+#plot
+plt.figure(figsize=(10,6))
+plt.errorbar(
+    summary_df.index,
+    summary_df["coef"],
+    yerr=[summary_df["coef"] - summary_df["lower"], summary_df["upper"] - summary_df["coef"]],
+    fmt='o',
+    capsize=5,
+    markersize=6,
+    linewidth=1.5
+)
+
+plt.axhline(0, color='gray', linestyle='- -', linewidth=1)
+plt.xticks(rotation=90)
+plt.ylabel("Coefficient Estimate")
+plt.title("Coefficient Plot")
+plt.tight_layout()
+plt.show()
+'''
